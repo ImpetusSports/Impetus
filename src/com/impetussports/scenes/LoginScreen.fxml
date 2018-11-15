@@ -3,7 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane minHeight="100.0" minWidth="100.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.impetussports.controllers.LoginScreenController">
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.impetussports.controllers.LoginScreenController">
     <stylesheets>
         <URL value="@/com/impetussports/styles/Appearance.css" />
     </stylesheets>

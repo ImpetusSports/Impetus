@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -31,8 +32,8 @@ import javafx.scene.layout.Pane;
  */
 public class AnchorController implements Initializable {
 
-    private final Map<Pane, Object> stackPaneControllerTable = new HashMap();
-    private static final ArrayList<Pane> views = new ArrayList<>();
+    private final Map<Node, Object> controllerTable = new HashMap();
+    private static final List<Node> VIEWS = new ArrayList<>();
 
     @FXML
     private BorderPane mainBorderPane;
@@ -41,8 +42,8 @@ public class AnchorController implements Initializable {
         mainBorderPane.setCenter(stackPane);
     }
 
-    public static ArrayList<Pane> getViews() {
-        return views;
+    public static List<Node> getViews() {
+        return VIEWS;
     }
 
     @Override
@@ -61,42 +62,35 @@ public class AnchorController implements Initializable {
         try {
             ArrayList<String> viewNames = PackageContents.getPackageContentsNames("com.impetussports.scenes");
             ArrayList<String> viewPaths = PackageContents.getPackageFXMLPaths("com.impetussports.scenes");
-            ArrayList<String> controllerPaths = PackageContents.getPackageContentsPaths("com.impetussports.controllers");
             for (String viewName : viewNames) {
                 if ((!viewName.equals("Anchor"))) {
                     try {
-                        views.add(getPane(viewPaths.get(ArrayListFinder.indexOfString(viewPaths, viewName)), viewName));
+                        VIEWS.add(getPane(viewPaths.get(ArrayListFinder.indexOfString(viewPaths, viewName)), viewName));
                     } catch (Exception ex) {
                         Logger.getLogger(AnchorController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AnchorController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(AnchorController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
+        } catch (ClassNotFoundException | IOException | URISyntaxException ex) {
             Logger.getLogger(AnchorController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void setNavigationController() {
-        NavigationBarController NavBar = (NavigationBarController) getPaneController(views.get(ArrayListFinder.indexOfPane(views, "NavigationBar")));
+        NavigationBarController NavBar = (NavigationBarController) getController(VIEWS.get(ArrayListFinder.indexOfNode(VIEWS, "NavigationBar")));
         NavBar.setMainController(this);
 
     }
 
     private void setMainBorderPane() {
-        mainBorderPane.setTop(views.get(ArrayListFinder.indexOfPane(views, "Menu")));
-        mainBorderPane.setCenter(views.get(ArrayListFinder.indexOfPane(views, "Login")));
-        mainBorderPane.getLeft().managedProperty().bind(mainBorderPane.getLeft().visibleProperty());
-        mainBorderPane.getRight().managedProperty().bind(mainBorderPane.getRight().visibleProperty());
-//        mainBorderPane.setCenter(views.get(ArrayListFinder.indexOfPane(views, "Login")));
-        
+        mainBorderPane.setTop(VIEWS.get(ArrayListFinder.indexOfNode(VIEWS, "Menu")));
+        mainBorderPane.setLeft(VIEWS.get(ArrayListFinder.indexOfNode(VIEWS, "NavigationBar")));  
     }
+    
 
     private Pane getPane(String viewPath, String viewName) {
         try {
+            System.out.println(viewName);
             Pane pane = new Pane();
             pane.setId(viewName);
             URL location = getClass().getResource("/" + viewPath);
@@ -106,32 +100,32 @@ public class AnchorController implements Initializable {
             Node root = (Node) fxmlLoader.load(location.openStream());
             Object guiController = (Object) fxmlLoader.getController();
             pane.getChildren().add(root);
-            stackPaneControllerTable.put(pane, guiController);
+            controllerTable.put(pane, guiController);
             return pane;
         } catch (IOException ex) {
             Logger.getLogger(AnchorController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Error");
+        System.out.println("Error could not load fxml: " + viewName + " from location : " + viewPath);
         return null;
     }
 
-    public Object getPaneController(Pane pane){
-        return stackPaneControllerTable.get(pane);
+    public Object getController(Node node){
+        return controllerTable.get(node);
     }
 
-    public void setCenterPane(Pane pane) {
-        mainBorderPane.setCenter(pane);
+    public void setCenterPane(Node node) {
+        mainBorderPane.setCenter(node);
     }
 
-    public void setTopPane(Pane pane) {
-        mainBorderPane.setTop(pane);
+    public void setTopPane(Node node) {
+        mainBorderPane.setTop(node);
     }
 
-    public void setBottomPane(Pane pane) {
-        mainBorderPane.setBottom(pane);
+    public void setBottomPane(Node node) {
+        mainBorderPane.setBottom(node);
     }
 
-    public void setLeftPane(Pane pane) {
-        mainBorderPane.setLeft(pane);
+    public void setLeftPane(Node node) {
+        mainBorderPane.setLeft(node);
     }
 }

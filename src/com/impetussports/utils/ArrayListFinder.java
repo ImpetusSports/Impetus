@@ -6,8 +6,8 @@
 package com.impetussports.utils;
 
 import java.util.ArrayList;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import java.util.List;
+import javafx.scene.Node;
 
 /**
  *
@@ -28,27 +28,16 @@ public class ArrayListFinder {
         return -1;
     }
 
-    public static int indexOfStackPane(ArrayList<StackPane> array2Search, String string2Find) {
+    public static int indexOfNode(List<Node> array2Search, String string2Find) {
         int index = 0;
-        for (StackPane currentElement : array2Search) {
+        for (Node currentElement : array2Search) {
             if (currentElement.getId().contains(string2Find)) {
                 return index;
             } else {
                 index++;
             }
         }
-        return -1;
-    }
-
-    public static int indexOfPane(ArrayList<Pane> array2Search, String string2Find) {
-        int index = 0;
-        for (Pane currentElement : array2Search) {
-            if (currentElement.getId().contains(string2Find)) {
-                return index;
-            } else {
-                index++;
-            }
-        }
+        System.out.println("Error: Could Not Find String In Array");
         return -1;
     }
 }

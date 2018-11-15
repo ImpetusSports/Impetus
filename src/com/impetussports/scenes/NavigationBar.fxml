@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.impetussports.controllers.NavigationBarController">
-    <stylesheets>
-        <URL value="@/com/impetussports/styles/Appearance.css"/>
-    </stylesheets>
-</AnchorPane>
+<VBox fx:controller="com.impetussports.controllers.NavigationBarController" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: navy;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button mnemonicParsing="false" onAction="#showLoginScreen" text="test1" />
+      <Button mnemonicParsing="false" onAction="#showStettings" text="test2" />
+   </children>
+</VBox>
