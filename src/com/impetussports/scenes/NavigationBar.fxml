@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="com.impetussports.controllers.NavigationBarController" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: navy;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minWidth="100.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.impetussports.controllers.NavigationBarController">
    <children>
-      <Button mnemonicParsing="false" onAction="#showLoginScreen" text="test1" />
-      <Button mnemonicParsing="false" onAction="#showStettings" text="test2" />
+      <VBox alignment="CENTER" minHeight="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#showUserProfile" prefHeight="100.0" prefWidth="100.0" text="User Profile" textAlignment="CENTER" wrapText="true" />
+            <Button mnemonicParsing="false" onAction="#showWorkoutBuilder" prefHeight="100.0" prefWidth="100.0" text="Workout Builder" textAlignment="CENTER" wrapText="true" />
+            <Button mnemonicParsing="false" onAction="#showWorkout" prefHeight="100.0" prefWidth="100.0" text="Workout" textAlignment="CENTER" wrapText="true" />
+            <Button mnemonicParsing="false" onAction="#showWorkoutHistory" prefHeight="100.0" prefWidth="100.0" text="Workout History" textAlignment="CENTER" wrapText="true" />
+            <Button mnemonicParsing="false" onAction="#showStettings" prefHeight="100.0" prefWidth="100.0" text="Settings " textAlignment="CENTER" wrapText="true" />
+         </children>
+      </VBox>
    </children>
-</VBox>
+</AnchorPane>

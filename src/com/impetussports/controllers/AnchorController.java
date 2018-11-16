@@ -24,6 +24,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 /**
  * FXML Controller class
@@ -54,6 +55,7 @@ public class AnchorController implements Initializable {
         } catch (Exception ex) {
             System.out.println("Could Not Load Views");
         }
+        System.out.println("Adding Navigation Capabilities");
         setNavigationController();
         setMainBorderPane();
     }
@@ -77,14 +79,21 @@ public class AnchorController implements Initializable {
     }
 
     private void setNavigationController() {
-        NavigationBarController NavBar = (NavigationBarController) getController(VIEWS.get(ArrayListFinder.indexOfNode(VIEWS, "NavigationBar")));
-        NavBar.setMainController(this);
-
+        try{
+        for (Node view:VIEWS){
+            if(NavigationControllerClass.class.isAssignableFrom(getController(view).getClass())){
+                System.out.println("Is Assignable: " + view.getId());
+                NavigationControllerClass addNav = (NavigationControllerClass) getController(view);
+                addNav.setMainController(this);
+             }}
+        }catch(Exception ex){
+        System.out.println(ex);
+        }
     }
 
-    private void setMainBorderPane() {
-        mainBorderPane.setTop(VIEWS.get(ArrayListFinder.indexOfNode(VIEWS, "Menu")));
-        mainBorderPane.setLeft(VIEWS.get(ArrayListFinder.indexOfNode(VIEWS, "NavigationBar")));  
+    private  void setMainBorderPane() {
+        setTopPane(VIEWS.get(ArrayListFinder.indexOfNode(VIEWS, "MenuBar")));
+        setCenterPane(VIEWS.get(ArrayListFinder.indexOfNode(VIEWS, "LoginScreen")));  
     }
     
 
@@ -97,9 +106,11 @@ public class AnchorController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(location);
             fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-            Node root = (Node) fxmlLoader.load(location.openStream());
+            Region root = (Region) fxmlLoader.load(location.openStream());
             Object guiController = (Object) fxmlLoader.getController();
             pane.getChildren().add(root);
+            root.prefHeightProperty().bind(pane.heightProperty());
+            root.prefWidthProperty().bind(pane.widthProperty());
             controllerTable.put(pane, guiController);
             return pane;
         } catch (IOException ex) {
@@ -121,7 +132,7 @@ public class AnchorController implements Initializable {
         mainBorderPane.setTop(node);
     }
 
-    public void setBottomPane(Node node) {
+    public  void setBottomPane(Node node) {
         mainBorderPane.setBottom(node);
     }
 

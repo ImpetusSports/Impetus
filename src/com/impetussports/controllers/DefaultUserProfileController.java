@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
  *
  * @author Michael Orner
  */
-public class IndividualUserProfileController implements Initializable {
+public class DefaultUserProfileController implements Initializable {
     @FXML
     private Text usersName;
 
