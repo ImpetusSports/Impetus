@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 /**
  *
@@ -32,7 +33,7 @@ public class DBConnect {
         config = new AnnotationConfiguration();
         addAnnotatedClasses();
         config.configure(hibernateConfigurationFile);
-    //    new SchemaExport(config).create(true , true);
+  //      new SchemaExport(config).create(true , true);
         dbFactory = config.buildSessionFactory();
         session = dbFactory.getCurrentSession();
     }

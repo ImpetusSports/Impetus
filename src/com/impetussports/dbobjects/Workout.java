@@ -23,13 +23,13 @@ import javax.persistence.OneToMany;
 @Entity
 public class Workout implements Serializable {
     @Id
-    private String date;
+    private String dateOfWorkout;
     private double tonnage;
     private double totalDistanceTravel;
     
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    @JoinColumn(name="account_id")
+    private Account account;
     
     @OneToMany(mappedBy = "workout")
     private List<Exercise> exercises;

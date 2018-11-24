@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
  *
  * @author Michael Orner
  */
-public class IndividualUserProfileController implements Initializable {
+public class IndividualUserProfileController  extends UpdateControllerFromAccount implements Initializable {
     @FXML
     private Text usersName;
 
@@ -25,7 +25,6 @@ public class IndividualUserProfileController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
     
 }

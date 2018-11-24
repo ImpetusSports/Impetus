@@ -70,8 +70,13 @@ public class MainApp extends Application {
         stage.showingProperty().addListener((obs, oldVal, newVal) -> {
             System.out.println("Program Closed");
             System.out.println("Closing Database Connection...");
-            DBConnect.getSession().close();
-            DBConnect.getDbFactory().close();
+            if (DBConnect.getSession().isOpen()){
+                DBConnect.getSession().close();
+            }
+            if (!DBConnect.getDbFactory().isClosed()){
+                 DBConnect.getDbFactory().close();
+            }
+
             System.out.println("Good Bye");
         });
     }
